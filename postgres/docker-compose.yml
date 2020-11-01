@@ -1,0 +1,17 @@
+version: '3'
+services:
+  db:
+    container_name: postgres
+    restart: always
+    image: postgres
+    env_file:
+        - .env
+    ports:
+      - "8432:5432"
+    environment:
+     TZ: "Asia/Jakarta"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+volumes:
+    postgres_volume:
+       external : true
