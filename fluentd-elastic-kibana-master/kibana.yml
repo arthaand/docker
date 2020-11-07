@@ -3,3 +3,4 @@ server.host: "0"
 elasticsearch.hosts: [ "http://elasticsearch:9200" ]
 elasticsearch.username: kibana
 elasticsearch.password: PdO27MRPrZsPcmRalPyQ
+xpack.encryptedSavedObjects.encryptionKey: wjebr2434wjnrwlrfwbftwlg

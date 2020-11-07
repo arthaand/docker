@@ -1,0 +1,49 @@
+version: '3.3'
+services:
+  heartbeat:
+    container_name: heartbeat
+    build: .
+    #image: heartbeat
+    restart: always
+[root@dev-ottopoint heartbeat]# ls
+docker-compose.yml  Dockerfile  heartbeat.docker.yml  heartbeat.yml
+[root@dev-ottopoint heartbeat]# cat heartbeat.yml 
+heartbeat.monitors:
+- type: http
+  id: shared-service
+  name: Shared Service
+  schedule: '@every 20s'
+  urls:
+    - http://13.228.25.85:8703/ottopoint/v0.1.0/redis//healthcheck-redisservice
+
+- type: http
+  id: ottopoint-product
+  name: Ottopoint Product
+  schedule: '@every 20s'
+  urls:
+    - https://apidev.ottopoint.id/product/   
+  check.response.status: [404]
+
+- type: http
+  id: ottopoint-loyalty
+  name: Ottopoint Loyalty
+  schedule: '@every 20s'
+  urls:
+    - https://apidev.ottopoint.id/loyalty/
+  check.response.status: [404]
+
+- type: http
+  id: ottopoint-transaction
+  name: Ottopoint Transaction
+  schedule: '@every 20s'
+  urls:
+    - https://apidev.ottopoint.id/transaction/
+  check.response.status: [404]
+
+processors:
+- add_cloud_metadata: ~
+
+output.elasticsearch:
+  hosts: 'ips:9200'
+  username: 'elastic'
+  password: 'pass'

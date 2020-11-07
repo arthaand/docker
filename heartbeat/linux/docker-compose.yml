@@ -1,0 +1,7 @@
+version: '3.3'
+services:
+  heartbeat:
+    container_name: heartbeat
+    build: .
+    #image: heartbeat
+    restart: always
